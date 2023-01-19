@@ -2,11 +2,11 @@
 arch=$1
 case $arch in
 	aarch64)
-		target=aarch64-sante-elf ;;
+		target=aarch64-sante-linux-gnu ;;
 	x86_64)
-		target=x86_64-sante-elf ;;
+		target=x86_64-sante-linux-gnu ;;
 	powerpc)
-                target=powerpc-sante-elf ;;
+                target=powerpc-sante-linux-gnu ;;
 	*)
 		echo "Unsupported arch: $arch"
 		exit 1
