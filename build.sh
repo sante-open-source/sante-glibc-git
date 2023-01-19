@@ -21,7 +21,7 @@ git clone --depth=1 git://sourceware.org/git/binutils-gdb.git &> /dev/null
 mkdir binutils-gdb-build && cd binutils-gdb-build
 ../binutils-gdb/configure --target=$target \
 	                  --prefix=$toolchain_prefix \
-		          --disable-nls \
+		          --disable-nls
 make -j`nproc`
 make install
 cd .. && rm -rf binutils-gdb
