@@ -20,8 +20,7 @@ urls=(git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
       git://gcc.gnu.org/git/gcc.git
       git://sourceware.org/git/glibc.git)
 for url in "${urls[@]}"; do
-	git clone --depth=1 git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git &> /dev/null
-/null
+	git clone --depth=1 "$url" &> /dev/null
 done
 
 # Install linux headers
