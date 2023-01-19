@@ -52,7 +52,8 @@ rm -rf *
 ../gcc/configure --target=$target \
 	         --prefix=$toolchain_prefix \
 		 --enable-languages=c,c++ \
-		 --disable-nls
+		 --disable-nls \
+		 --disable-multilib
 make -j`nproc`
 make install
 ls $toolchain_prefix/bin
