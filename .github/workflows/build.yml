@@ -14,6 +14,6 @@ jobs:
         run: |
           pacman -Syy
           pacman -Syyuu --noconfirm linux-api-headers gcc mpc mpfr wget make git texinfo \
-                                    bison flex
+                                    bison flex diffutils
       - name: Build
         run: ./build.sh x86_64
