@@ -11,7 +11,7 @@ case $arch in
 		echo "Unsupported arch: $arch"
 		exit 1
 esac
-toolchain_prefix=$HOME/dist/$target-sante-linux-gnu-gcc/$target-sante-linux-gnu-gcc-git
+toolchain_prefix=$HOME/dist/$target-gcc/$target-gcc-git
 export PATH="$PATH:$toolchain_prefix/bin"
 
 # Clone linux, binutils, gcc and glibc
