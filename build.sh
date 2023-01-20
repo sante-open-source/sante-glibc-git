@@ -15,17 +15,12 @@ toolchain_prefix=$HOME/dist/$target-gcc/$target-gcc-git
 export PATH="$PATH:$toolchain_prefix/bin"
 
 # Clone linux, binutils, gcc and glibc
-urls=(git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-      git://sourceware.org/git/binutils-gdb.git
+urls=(git://sourceware.org/git/binutils-gdb.git
       git://gcc.gnu.org/git/gcc.git
       git://sourceware.org/git/glibc.git)
 for url in "${urls[@]}"; do
 	git clone --depth=1 "$url" &> /dev/null
 done
-
-# Install linux headers
-cd linux
-sudo make ARCH=$(echo $target | cut -d '-' -f 1) INSTALL_HDR_PATH=/usr headers_install
 
 # Build binutils and gdb
 cd .. && mkdir binutils-gdb-build && cd binutils-gdb-build
