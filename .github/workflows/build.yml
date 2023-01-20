@@ -13,6 +13,7 @@ jobs:
       - name: Install dependencies
         run: |
           pacman -Syy
-          pacman -Syyuu --noconfirm linux-api-headers gcc mpc mpfr wget make git texinfo
+          pacman -Syyuu --noconfirm linux-api-headers gcc mpc mpfr wget make git texinfo \
+                                    bison flex
       - name: Build
         run: ./build.sh x86_64
