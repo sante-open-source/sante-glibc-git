@@ -19,7 +19,7 @@ urls=(git://sourceware.org/git/binutils-gdb.git
       git://gcc.gnu.org/git/gcc.git
       git://sourceware.org/git/glibc.git)
 for url in "${urls[@]}"; do
-	git clone --depth=1 "$url" &> /dev/null
+	git clone --depth=1 "$url"
 done
 
 # Build binutils and gdb
