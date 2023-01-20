@@ -15,15 +15,20 @@ toolchain_prefix=$HOME/dist/$target-sante-linux-gnu-gcc/$target-sante-linux-gnu-
 export PATH="$PATH:$toolchain_prefix/bin"
 
 # Clone linux, binutils, gcc and glibc
-urls=(git://sourceware.org/git/binutils-gdb.git
+urls=(git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+      git://sourceware.org/git/binutils-gdb.git
       git://gcc.gnu.org/git/gcc.git
       git://sourceware.org/git/glibc.git)
 for url in "${urls[@]}"; do
 	git clone --depth=1 "$url" &> /dev/null
 done
 
+# Install linux headers
+cd linux
+make ARCH=$(echo $target | cut -d '-' -f 1) INSTALL_HDR_PATH=$toolchain_prefix headers_install
+
 # Build binutils and gdb
-mkdir binutils-gdb-build && cd binutils-gdb-build
+cd .. && mkdir binutils-gdb-build && cd binutils-gdb-build
 ../binutils-gdb/configure --target=$target \
 	                  --prefix=$toolchain_prefix \
 		          --disable-multilib
@@ -47,7 +52,8 @@ cd .. && mkdir build-glibc && cd build-glibc
 	           --host=$target \
 		   --build=x86_64-linux-gnu \
 	           --prefix=$toolchain_prefix \
-		   --disable-multilib
+		   --disable-multilib \
+		   --with-headers=$toolchain_prefix/include \
 		   --without-selinux \
 		   libc_cv_forced_unwind=yes
 make install-bootstrap-headers=yes install-headers
