@@ -19,11 +19,11 @@ urls=(git://sourceware.org/git/binutils-gdb.git
       git://gcc.gnu.org/git/gcc.git
       git://sourceware.org/git/glibc.git)
 for url in "${urls[@]}"; do
-	git clone --depth=1 "$url"
+	git clone --depth=1 "$url" &> /dev/null
 done
 
 # Build binutils and gdb
-cd .. && mkdir binutils-gdb-build && cd binutils-gdb-build
+mkdir binutils-gdb-build && cd binutils-gdb-build
 ../binutils-gdb/configure --target=$target \
 	                  --prefix=$toolchain_prefix \
 		          --disable-multilib
