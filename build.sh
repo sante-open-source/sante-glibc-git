@@ -27,7 +27,7 @@ mkdir binutils-gdb-build && cd binutils-gdb-build
 ../binutils-gdb/configure --target=$target \
 	                  --prefix=$toolchain_prefix \
 		          --disable-multilib
-make -j`nproc`
+make
 make install
 
 # Build gcc (stage 1)
@@ -38,7 +38,7 @@ cd .. && mkdir build-gcc && cd build-gcc
 	         --prefix=$toolchain_prefix \
 		 --enable-languages=c,c++ \
 		 --disable-multilib
-make -j`nproc` all-gcc
+make all-gcc
 make install-gcc
 
 # Build glibc (stage 1)
@@ -52,23 +52,23 @@ cd .. && mkdir build-glibc && cd build-glibc/
 		   --without-selinux \
 		   libc_cv_forced_unwind=yes
 make install-bootstrap-headers=yes install-headers
-make -j`nproc` csu/subdir_lib
+make csu/subdir_lib
 install csu/crt1.o csu/crti.o csu/crtn.o $toolchain_prefix/lib
 $target-gcc -nostdlib -nostartfiles -shared -xc /dev/null -o $toolchain_prefix/lib/libc.so
 touch $toolchain_prefix/include/gnu/stubs.h
 
 # Build gcc (stage 2)
 cd ../build-gcc
-make -j`nproc` all-target-libgcc
+make all-target-libgcc
 make install-target-libgcc
 
 # Build glibc (stage 2)
 cd ../build-glibc
-make -j`nproc`
+make
 make install
 
 # Build libstdc++
 cd ../build-gcc
-make -j`nproc`
+make
 make install
 ls $toolchain_prefix/bin
