@@ -25,7 +25,7 @@ done
 
 # Install linux headers
 cd linux
-make ARCH=$(echo $target | cut -d '-' -f 1) INSTALL_HDR_PATH=$toolchain_prefix headers_install
+sudo make ARCH=$(echo $target | cut -d '-' -f 1) INSTALL_HDR_PATH=/usr headers_install
 
 # Build binutils and gdb
 cd .. && mkdir binutils-gdb-build && cd binutils-gdb-build
