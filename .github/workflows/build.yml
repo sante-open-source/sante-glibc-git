@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@main
       - name: Install dependencies
         run: |
-          sudo pacman -Syy
-          sudo pacman -Syyuu --noconfirm linux-api-headers gcc mpc mpfr git 
+          pacman -Syy
+          pacman -Syyuu --noconfirm linux-api-headers gcc mpc mpfr wget make
       - name: Build
         run: ./build.sh x86_64
