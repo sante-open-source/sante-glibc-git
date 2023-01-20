@@ -10,6 +10,7 @@ jobs:
         uses: actions/checkout@main
       - name: Install dependencies
         run: >
-          sudo apt-get -qqy install rsync libgmp-dev libmpfr-dev libgcc-10-dev libc6-dev
+          sudo apt-get -qqy install rsync libgmp-dev libmpfr-dev 
+          libgcc-10-dev libc6-dev linux-libc-dev
       - name: Build
         run: ./build.sh x86_64

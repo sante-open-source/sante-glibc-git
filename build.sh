@@ -48,13 +48,12 @@ make install-gcc
 
 # Build glibc (stage 1)
 cd .. && mkdir build-glibc && cd build-glibc/
-cp -r ../glibc/include/* $toolchain_prefix/include/
 ../glibc/configure --target=$target \
 	           --host=$target \
 		   --build=x86_64-linux-gnu \
 	           --prefix=$toolchain_prefix \
 		   --disable-multilib \
-		   --with-headers=$toolchain_prefix/include \
+		   --with-headers=/usr/include \
 		   --without-selinux \
 		   libc_cv_forced_unwind=yes
 make install-bootstrap-headers=yes install-headers
