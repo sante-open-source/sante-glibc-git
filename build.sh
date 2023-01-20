@@ -47,7 +47,8 @@ make -j`nproc` all-gcc
 make install-gcc
 
 # Build glibc (stage 1)
-cd .. && mkdir build-glibc && cd build-glibc
+cd .. && mkdir build-glibc && cd build-glibc/
+cp -r ../glibc/include/* $toolchain_prefix/include/
 ../glibc/configure --target=$target \
 	           --host=$target \
 		   --build=x86_64-linux-gnu \
