@@ -51,7 +51,12 @@ cd .. && mkdir build-glibc && cd build-glibc/
 		   --disable-multilib \
 		   --with-headers=/usr/include \
 		   --without-selinux \
-		   libc_cv_forced_unwind=yes
+		   libc_cv_forced_unwind=yes \
+                   CC=$target-gcc \
+                   CXX=$target-g++ \
+                   AR=$target-gcc-ar \
+                   RANLIB=$target-gcc-ranlib \
+                   BUILD_CC=gcc
 make install-bootstrap-headers=yes install-headers
 make -j`nproc` csu/subdir_lib
 install csu/crt1.o csu/crti.o csu/crtn.o $toolchain_prefix/lib
