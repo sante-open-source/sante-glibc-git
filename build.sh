@@ -38,7 +38,7 @@ cd .. && mkdir build-gcc && cd build-gcc
 	         --prefix=$toolchain_prefix \
 		 --enable-languages=c,c++ \
 		 --disable-multilib \
-		 --without-headers
+		 --with-headers=/usr/include
 make -j`nproc` all-gcc
 make install-gcc
 
