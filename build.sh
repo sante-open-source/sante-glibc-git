@@ -38,6 +38,10 @@ cd .. && mkdir build-gcc && cd build-gcc
 	         --prefix=$toolchain_prefix \
 		 --enable-languages=c,c++ \
 		 --disable-multilib \
+                 --program-prefix=$target- \
+                 --with-local-prefix=$toolchain_prefix \
+                 --with-sysroot=$toolchain_prefix \
+                 --with-build-sysroot=$toolchain_prefix \
 		 --with-headers=/usr/include
 make -j`nproc` all-gcc
 make install-gcc
@@ -49,7 +53,6 @@ cd .. && mkdir build-glibc && cd build-glibc/
 		   --build=x86_64-linux-gnu \
 	           --prefix=$toolchain_prefix \
 		   --disable-multilib \
-		   --with-headers=/usr/include \
 		   --without-selinux \
 		   libc_cv_forced_unwind=yes
 make install-bootstrap-headers=yes install-headers
@@ -61,7 +64,7 @@ ls $toolchain_prefix/lib
 
 # Build gcc (stage 2)
 cd ../build-gcc
-CFLAGS="${CFLAGS} -B$toolchain_prefix/lib" make -j`nproc` all-target-libgcc
+make -j`nproc` all-target-libgcc
 make install-target-libgcc
 
 # Build glibc (stage 2)
